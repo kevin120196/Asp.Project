@@ -62,23 +62,32 @@ namespace MVCWEB.Controllers
         // GET: Modelo/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            modeloRequestEdit modelo = new modeloRequestEdit();
+            using (var db=new TiendaOnlineEntities1())
+            {
+                var Modelo1 = db.Modelo.Find(id);
+                modelo.NombreModelo = Modelo1.NombreModelo;
+                modelo.idModelo = Modelo1.id;
+            }
+            return View(modelo);
         }
 
         // POST: Modelo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, modeloRequestEdit request)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(request);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            using (var db = new TiendaOnlineEntities1())
             {
-                return View();
+                var Modelo1 = db.Modelo.Find(request.idModelo);
+                Modelo1.NombreModelo = request.NombreModelo;
+                db.SaveChanges();
             }
+                return Redirect(Url.Content("~/Modelo/"));
         }
 
         // GET: Modelo/Delete/5

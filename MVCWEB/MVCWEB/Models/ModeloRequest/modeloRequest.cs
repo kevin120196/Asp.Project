@@ -17,4 +17,19 @@ namespace MVCWEB.Models.ModeloRequest
             get; set;
         }
     }
+
+    public class modeloRequestEdit
+    {
+
+        public int idModelo { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "El Modelo ingresado exede la longitud establecida")]
+        [Display(Name = "Nombre del Modelo")]
+        public string NombreModelo
+        {
+            get; set;
+        }
+    }
 }
