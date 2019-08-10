@@ -93,7 +93,13 @@ namespace MVCWEB.Controllers
         // GET: Modelo/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (TiendaOnlineEntities1 db=new TiendaOnlineEntities1())
+            {
+                var Modelo1 = db.Modelo.Find(id);
+                db.Modelo.Remove(Modelo1);
+                db.SaveChanges();
+            }
+            return Redirect("~/Modelo/");
         }
 
         // POST: Modelo/Delete/5
