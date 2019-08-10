@@ -30,7 +30,6 @@ namespace MVCWEB.Models
         public virtual DbSet<Guantes> Guantes { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

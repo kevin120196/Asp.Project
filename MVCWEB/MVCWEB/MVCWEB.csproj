@@ -176,9 +176,6 @@
     </Compile>
     <Compile Include="Models\ModeloModel\modeloModel.cs" />
     <Compile Include="Models\ModeloRequest\modeloRequest.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>db.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
@@ -268,14 +265,18 @@
     <Content Include="Views\Modelo\Index.cshtml" />
     <Content Include="Views\Modelo\Create.cshtml" />
     <Content Include="Views\Modelo\Edit.cshtml" />
+    <Content Include="Views\Marca\Index.cshtml" />
+    <Content Include="Views\Marca\Create.cshtml" />
+    <Content Include="Views\Marca\Edit.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Categoria\Create.cshtml" />
+    <Content Include="Views\Categoria\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\GuanteModel\" />
-    <Folder Include="Views\Categorias\" />
     <Folder Include="Views\Colores\" />
     <Folder Include="Views\Guantes\" />
-    <Folder Include="Views\Marcas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

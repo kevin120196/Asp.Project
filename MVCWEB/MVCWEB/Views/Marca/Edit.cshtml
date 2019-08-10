@@ -1,24 +1,25 @@
-﻿@model MVCWEB.Models.ModeloRequest.modeloRequestEdit
+﻿@model MVCWEB.Models.MarcaModel.EditMarca
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm("Edit", "Modelo", FormMethod.Post, new { role = "form", @class = "formulario" }))
+        @using (Html.BeginForm("Edit", "Marca", FormMethod.Post, new { role = "form", @class = "formulario" }))
         {
-            <h2>Edición de Modelo</h2>
+            <h2>Edición de Marca</h2>
             <hr />
-
-            @Html.HiddenFor(d => d.idModelo)
+            @Html.HiddenFor(d => d.idMarca)
             @Html.AntiForgeryToken()
 
             <div class="form-group grupoControl">
 
                 @Html.ValidationMessage("error", new { @class = "text-danger" })
-                @Html.LabelFor(d => d.NombreModelo)
-                @Html.TextBoxFor(d => d.NombreModelo, new { @class = "form-control" })
+                @Html.LabelFor(d => d.NombreMarca)
+                @Html.TextBoxFor(d => d.NombreMarca, new { @class = "form-control" })
 
             </div>
 

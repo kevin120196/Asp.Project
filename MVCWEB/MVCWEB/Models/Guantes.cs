@@ -15,7 +15,7 @@ namespace MVCWEB.Models
     public partial class Guantes
     {
         public int idGuate { get; set; }
-        public string ImagenGuante { get; set; }
+        public byte[] ImagenGuante { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Talla { get; set; }
         public Nullable<int> idMarca { get; set; }

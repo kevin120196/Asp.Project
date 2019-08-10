@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MVCWEB.Models;
+using MVCWEB.Models.MarcaModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,16 @@ namespace MVCWEB.Controllers
         // GET: Marca
         public ActionResult Index()
         {
-            return View();
+            List<marcaModel> lst = null;
+            using (TiendaOnlineEntities1 db = new TiendaOnlineEntities1())
+            {
+                lst=(from d in db.Marca
+                     select new marcaModel {
+                         idMarca=d.id,
+                         NombreMarca=d.NombreMarca
+                     }).ToList();
+            }
+            return View(lst);
         }
 
         // GET: Marca/Details/5
@@ -28,46 +39,64 @@ namespace MVCWEB.Controllers
 
         // POST: Marca/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CategoriaRequest request)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+
+            using (var db=new TiendaOnlineEntities1())
+            {
+                Marca Marca1 = new Marca();
+                Marca1.NombreMarca = request.NombreMarca;
+                db.Marca.Add(Marca1);
+                db.SaveChanges();
+            }
+            return Redirect(Url.Content("~/Marca/"));
         }
 
         // GET: Marca/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            EditMarca Marca = new EditMarca();
+            using (var db=new TiendaOnlineEntities1())
+            {
+                var Marca1 = db.Marca.Find(id);
+                Marca.NombreMarca = Marca1.NombreMarca;
+                Marca.idMarca = Marca1.id;
+            }
+            return View(Marca);
         }
 
         // POST: Marca/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EditMarca request)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(request);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            using (var db=new TiendaOnlineEntities1())
             {
-                return View();
+                var Marca1 = db.Marca.Find(request.idMarca);
+                Marca1.NombreMarca = request.NombreMarca;
+                db.SaveChanges();
             }
+            return Redirect(Url.Content("~/Marca/"));
         }
 
         // GET: Marca/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (TiendaOnlineEntities1 db=new TiendaOnlineEntities1())
+            {
+                var Marca1 = db.Marca.Find(id);
+                db.Marca.Remove(Marca1);
+                db.SaveChanges();
+            }
+            return Redirect("~/Marca/");
         }
 
         // POST: Marca/Delete/5

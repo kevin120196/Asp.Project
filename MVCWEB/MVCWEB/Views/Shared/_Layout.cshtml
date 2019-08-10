@@ -33,8 +33,12 @@
                     <li>
                         @Html.ActionLink("Usuarios", "Index", "User", new { area = "" }, new { @class = "enlace" })
                     </li>
-                    <li><a class="enlace" href="#">Contacto</a></li>
-                    <li><a class="enlace" href="#">Galeria</a></li>
+                    <li>
+                        @Html.ActionLink("Marcas", "Index", "Marca", new { area = "" }, new { @class = "enlace" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Categorias", "Index", "Categoria", new { area = "" }, new { @class = "enlace" })
+                    </li>
                     <li>
                         @Html.ActionLink("Modelos", "Index", "Modelo", new { area = "" }, new { @class = "enlace" })
                     </li>

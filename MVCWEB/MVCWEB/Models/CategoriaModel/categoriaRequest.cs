@@ -14,4 +14,16 @@ namespace MVCWEB.Models.CategoriaModel
         [Display(Name ="Nombre de Categoria")]
         public string NombreCategoria { get; set; }
     }
+
+    public class editCategoria
+    {
+
+        public int idCategoria { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "La categoria ingresada exede la longitud establecida")]
+        [Display(Name = "Nombre de Categoria")]
+        public string NombreCategoria { get; set; }
+
+    }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MVCWEB.Models;
+using MVCWEB.Models.CategoriaModel;
+using MVCWEB.Models.MarcaModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +14,19 @@ namespace MVCWEB.Controllers
         // GET: Categoria
         public ActionResult Index()
         {
-            return View();
+            List<categoriaModel> lst = null;
+            using (TiendaOnlineEntities1 db=new TiendaOnlineEntities1())
+            {
+                lst = (from d in db.Categoria
+                       select new categoriaModel
+                       {
+                           idCategoria=d.id,
+                           NombreCategoria=d.NombreCategoria
+                       }
+
+                    ).ToList();
+            }
+            return View(lst);
         }
 
         // GET: Categoria/Details/5
@@ -28,46 +43,73 @@ namespace MVCWEB.Controllers
 
         // POST: Categoria/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(categoriaRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
             try
             {
-                // TODO: Add insert logic here
+                using (var db = new TiendaOnlineEntities1())
+                {
+                    Categoria cat = new Categoria();
+                    cat.NombreCategoria = request.NombreCategoria;
+                    db.Categoria.Add(cat);
+                    db.SaveChanges();
+                }
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+
+                throw;
             }
+
+              return Redirect(Url.Content("~/Categoria/"));
         }
 
         // GET: Categoria/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            editCategoria cat = new editCategoria();
+            using (var db=new TiendaOnlineEntities1())
+            {
+                var Cat1 = db.Categoria.Find(id);
+                cat.NombreCategoria = Cat1.NombreCategoria;
+                cat.idCategoria = Cat1.id;
+            }
+            return View(cat);
         }
 
         // POST: Categoria/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, editCategoria request)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return View(request);
             }
-            catch
+            using (var db=new TiendaOnlineEntities1())
             {
-                return View();
+                var Cat = db.Categoria.Find(request.idCategoria);
+                Cat.NombreCategoria = request.NombreCategoria;
+                db.SaveChanges();
             }
+            return Redirect(Url.Content("~/Categoria/"));
         }
 
         // GET: Categoria/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (TiendaOnlineEntities1 db=new TiendaOnlineEntities1())
+            {
+                var Cat1 = db.Categoria.Find(id);
+                db.Categoria.Remove(Cat1);
+                db.SaveChanges();
+            }
+            return Redirect("~/Categoria/");
         }
 
         // POST: Categoria/Delete/5
